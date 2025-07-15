@@ -543,7 +543,16 @@ export const translations: Translations = {
     en: "This chatbot is currently not live. Please contact support for assistance.",
     pt: "Este chatbot não está ativo no momento. Por favor, entre em contato com o suporte para assistência.",
   },
+  accountDetailsPageTitle: {
+    en: "Account Details",
+    pt: "Detalhes da Conta",
+  },
+  bankServicesPageTitle: {
+    en: "Bank Services",
+    pt: "Serviços Bancários",
+  },
   bankServices: {
+    // Ensure this key is present for the button text
     en: "Bank Services",
     pt: "Serviços Bancários",
   },
@@ -554,10 +563,6 @@ export const translations: Translations = {
   exploreOurServices: {
     en: "Explore our wide range of banking services.",
     pt: "Explore a nossa vasta gama de serviços bancários.",
-  },
-  blankPageTitle: {
-    en: "Service Details",
-    pt: "Detalhes do Serviço",
   },
   blankPageContent: {
     en: "This page is currently under construction. Please check back later!",

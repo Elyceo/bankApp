@@ -8,7 +8,8 @@ import { ArrowLeft } from "lucide-react"
 import { X } from "lucide-react"
 import { useLanguage } from "@/components/language-context"
 import { translations } from "@/lib/translations"
-import { BankServicesPage } from "./bank-services-page" // Import the new page
+import { AccountDetailsPage } from "./account-details-page" // Import the renamed page
+import { BankServicesPage } from "./bank-services-page" // Import the new blank page
 
 export type AccountType = {
   id: string
@@ -32,7 +33,13 @@ export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
   const [authIdentifier, setAuthIdentifier] = useState<string | null>(null) // To store the phone/email for OTP hint
 
   const handleNext = () => setStep((prev) => prev + 1)
-  const handleBack = () => setStep((prev) => prev - 1)
+  const handleBack = () => {
+    if (step === 3 && flowType === "login") {
+      setStep(2) // Go back from BankServicesPage to AccountDetailsPage
+    } else {
+      setStep((prev) => prev - 1)
+    }
+  }
 
   const handleAuthSuccess = (identifier: string) => {
     setAuthIdentifier(identifier)
@@ -40,12 +47,13 @@ export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
   }
 
   const handleOtpVerifySuccess = () => {
-    if (flowType === "login") {
-      setStep(2) // Go to BankServicesPage for login flow
-    } else {
-      // 'account-opening'
-      setStep(2) // Go to AccountApplicationForm for account opening flow
-    }
+    // After OTP, for login flow, go to AccountDetailsPage (step 2)
+    // For account-opening flow, go to AccountApplicationForm (also step 2)
+    setStep(2)
+  }
+
+  const handleGoToBankServices = () => {
+    setStep(3) // Navigate to the new BankServicesPage (blank page)
   }
 
   const handleSelectAccount = (account: AccountType) => {
@@ -69,11 +77,24 @@ export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
         return <OtpVerification identifierHint={authIdentifier} onVerifySuccess={handleOtpVerifySuccess} />
       case 2:
         if (flowType === "login") {
-          return <BankServicesPage onClose={onClose} />
+          return <AccountDetailsPage onGoToBankServices={handleGoToBankServices} onClose={onClose} />
         } else {
           // 'account-opening'
           return <AccountApplicationForm onSubmit={handleFormSubmit} onBack={handleBack} />
         }
+      case 3:
+        if (flowType === "login") {
+          return <BankServicesPage onClose={onClose} onBack={handleBack} />
+        }
+        // Fallback for unexpected step in account-opening flow
+        return (
+          <div className="flex flex-col items-center justify-center h-full p-4 text-center">
+            <p className="text-lg text-slate-700">{translations.somethingWentWrong[language]}</p>
+            <ProfessionalButton onClick={onClose} className="mt-4">
+              {translations.close[language]}
+            </ProfessionalButton>
+          </div>
+        )
       default:
         return (
           <div className="flex flex-col items-center justify-center h-full p-4 text-center">
@@ -92,7 +113,11 @@ export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
     } else if (step === 1) {
       return translations.verifyYourIdentity[language]
     } else if (step === 2) {
-      return flowType === "login" ? translations.bankServices[language] : translations.accountOpening[language]
+      return flowType === "login"
+        ? translations.accountDetailsPageTitle[language]
+        : translations.accountOpening[language]
+    } else if (step === 3 && flowType === "login") {
+      return translations.bankServicesPageTitle[language]
     }
     return ""
   }
@@ -100,7 +125,7 @@ export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-white text-gray-900">
       <header className="flex items-center justify-between border-b border-gray-200 p-4">
-        {step === 1 && ( // Show back button ONLY on OTP verification step (step 1)
+        {(step === 1 || (step === 3 && flowType === "login")) && ( // Show back button on OTP and new Bank Services page
           <ProfessionalButton size="icon" variant="ghost" onClick={handleBack} aria-label="Go back">
             <ArrowLeft className="h-6 w-6 text-gray-600" />
           </ProfessionalButton>
