@@ -3,7 +3,7 @@ import Image from "next/image"
 import { ProfessionalButton } from "@/components/ui/professional-button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { Menu, Users, FileText, CreditCard, LogIn } from "lucide-react" // Import LogIn icon
+import { Menu, Users, FileText, CreditCard, LogIn } from "lucide-react"
 import { useState } from "react"
 import { OpenAccountFlow } from "./open-account-flow"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -13,8 +13,20 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 
 export function BankHomePage() {
   const carouselImages = ["/images/millennium-bim-carousel.jpeg"]
-  const [isAccountFlowOpen, setIsAccountFlowOpen] = useState(false)
-  const { language, setLanguage } = useLanguage()
+  const [activeFlow, setActiveFlow] = useState<"none" | "account-opening" | "login">("none") // New state for active flow
+  const { language } = useLanguage()
+
+  const handleOpenAccountClick = () => {
+    setActiveFlow("account-opening")
+  }
+
+  const handleLoginAccountClick = () => {
+    setActiveFlow("login")
+  }
+
+  const handleCloseFlow = () => {
+    setActiveFlow("none")
+  }
 
   return (
     <div className="relative flex min-h-screen flex-col bg-slate-50">
@@ -79,8 +91,8 @@ export function BankHomePage() {
         <section>
           <ProfessionalButton
             className="w-full h-16 text-left justify-start space-x-4"
-            disabled
-            aria-label={translations.logInAccount[language] + " (disabled)"}
+            onClick={handleLoginAccountClick} // Enabled and linked to new handler
+            aria-label={translations.logInAccount[language]}
           >
             <LogIn className="h-6 w-6" />
             <div>
@@ -96,7 +108,7 @@ export function BankHomePage() {
 
           <ProfessionalButton
             className="w-full h-16 text-left justify-start space-x-4"
-            onClick={() => setIsAccountFlowOpen(true)}
+            onClick={handleOpenAccountClick} // Linked to new handler
             aria-label={translations.openAccount[language]}
           >
             <CreditCard className="h-6 w-6" />
@@ -138,7 +150,7 @@ export function BankHomePage() {
       </footer>
 
       {/* Open Account Flow */}
-      {isAccountFlowOpen && <OpenAccountFlow onClose={() => setIsAccountFlowOpen(false)} />}
+      {activeFlow !== "none" && <OpenAccountFlow onClose={handleCloseFlow} flowType={activeFlow} />}
     </div>
   )
 }

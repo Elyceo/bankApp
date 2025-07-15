@@ -72,7 +72,7 @@ export const translations: Translations = {
     pt: "Nome de Usuário",
   },
   yourUsername: {
-    en: "Your Username",
+    en: "Seu Nome de Usuário",
     pt: "Seu Nome de Usuário",
   },
   password: {
@@ -88,7 +88,7 @@ export const translations: Translations = {
     pt: "REGISTRAR",
   },
   forgotUsername: {
-    en: "Forgot username",
+    en: "Esqueceu o nome de usuário",
     pt: "Esqueceu o nome de usuário",
   },
   preferredName: {
@@ -542,5 +542,25 @@ export const translations: Translations = {
   chatbotNotLive: {
     en: "This chatbot is currently not live. Please contact support for assistance.",
     pt: "Este chatbot não está ativo no momento. Por favor, entre em contato com o suporte para assistência.",
+  },
+  bankServices: {
+    en: "Bank Services",
+    pt: "Serviços Bancários",
+  },
+  welcomeToBankServices: {
+    en: "Welcome to your Bank Services!",
+    pt: "Bem-vindo aos seus Serviços Bancários!",
+  },
+  exploreOurServices: {
+    en: "Explore our wide range of banking services.",
+    pt: "Explore a nossa vasta gama de serviços bancários.",
+  },
+  blankPageTitle: {
+    en: "Service Details",
+    pt: "Detalhes do Serviço",
+  },
+  blankPageContent: {
+    en: "This page is currently under construction. Please check back later!",
+    pt: "Esta página está atualmente em construção. Por favor, volte mais tarde!",
   },
 }

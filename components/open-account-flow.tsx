@@ -3,11 +3,12 @@ import { useState } from "react"
 import { SignInRegister } from "./auth/sign-in-register"
 import { OtpVerification } from "./auth/otp-verification"
 import { AccountApplicationForm } from "./account-opening/account-application-form"
-import { ProfessionalButton } from "@/components/ui/professional-button" // Changed to ProfessionalButton
+import { ProfessionalButton } from "@/components/ui/professional-button"
 import { ArrowLeft } from "lucide-react"
 import { X } from "lucide-react"
-import { useLanguage } from "@/components/language-context" // Import useLanguage hook
-import { translations } from "@/lib/translations" // Import translations
+import { useLanguage } from "@/components/language-context"
+import { translations } from "@/lib/translations"
+import { BankServicesPage } from "./bank-services-page" // Import the new page
 
 export type AccountType = {
   id: string
@@ -18,8 +19,13 @@ export type AccountType = {
   requirements: string[]
 }
 
-export function OpenAccountFlow({ onClose }: { onClose: () => void }) {
-  const { language } = useLanguage() // Use language context
+interface OpenAccountFlowProps {
+  onClose: () => void
+  flowType: "account-opening" | "login" // New prop to distinguish flows
+}
+
+export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
+  const { language } = useLanguage()
   const [step, setStep] = useState(0)
   const [selectedAccount, setSelectedAccount] = useState<AccountType | null>(null)
   const [formData, setFormData] = useState({}) // To store form data across steps
@@ -31,6 +37,15 @@ export function OpenAccountFlow({ onClose }: { onClose: () => void }) {
   const handleAuthSuccess = (identifier: string) => {
     setAuthIdentifier(identifier)
     handleNext()
+  }
+
+  const handleOtpVerifySuccess = () => {
+    if (flowType === "login") {
+      setStep(2) // Go to BankServicesPage for login flow
+    } else {
+      // 'account-opening'
+      setStep(2) // Go to AccountApplicationForm for account opening flow
+    }
   }
 
   const handleSelectAccount = (account: AccountType) => {
@@ -51,9 +66,14 @@ export function OpenAccountFlow({ onClose }: { onClose: () => void }) {
       case 0:
         return <SignInRegister onAuthSuccess={handleAuthSuccess} onClose={onClose} />
       case 1:
-        return <OtpVerification identifierHint={authIdentifier} onVerifySuccess={handleNext} />
-      case 2: // Directly go to the application form
-        return <AccountApplicationForm onSubmit={handleFormSubmit} onBack={handleBack} />
+        return <OtpVerification identifierHint={authIdentifier} onVerifySuccess={handleOtpVerifySuccess} />
+      case 2:
+        if (flowType === "login") {
+          return <BankServicesPage onClose={onClose} />
+        } else {
+          // 'account-opening'
+          return <AccountApplicationForm onSubmit={handleFormSubmit} onBack={handleBack} />
+        }
       default:
         return (
           <div className="flex flex-col items-center justify-center h-full p-4 text-center">
@@ -66,6 +86,17 @@ export function OpenAccountFlow({ onClose }: { onClose: () => void }) {
     }
   }
 
+  const getHeaderTitle = () => {
+    if (step === 0) {
+      return translations.signInRegister[language]
+    } else if (step === 1) {
+      return translations.verifyYourIdentity[language]
+    } else if (step === 2) {
+      return flowType === "login" ? translations.bankServices[language] : translations.accountOpening[language]
+    }
+    return ""
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-white text-gray-900">
       <header className="flex items-center justify-between border-b border-gray-200 p-4">
@@ -74,11 +105,7 @@ export function OpenAccountFlow({ onClose }: { onClose: () => void }) {
             <ArrowLeft className="h-6 w-6 text-gray-600" />
           </ProfessionalButton>
         )}
-        <h2 className="flex-grow text-center text-lg font-semibold">
-          {step === 0 && translations.signInRegister[language]}
-          {step === 1 && translations.verifyYourIdentity[language]}
-          {step === 2 && translations.accountOpening[language]}
-        </h2>
+        <h2 className="flex-grow text-center text-lg font-semibold">{getHeaderTitle()}</h2>
         <ProfessionalButton size="icon" variant="ghost" onClick={onClose} aria-label="Close">
           <X className="h-6 w-6 text-gray-600" />
         </ProfessionalButton>
