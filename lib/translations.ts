@@ -47,7 +47,6 @@ export const translations: Translations = {
     pt: "Documentos Digitais",
   },
   accessYourStatements: {
-    // Updated translation
     en: "Access documents and forms",
     pt: "Acesse documentos e formulários",
   },
@@ -208,7 +207,7 @@ export const translations: Translations = {
     pt: "Agência",
   },
   personalDetails: {
-    en: "Detalhes Pessoais",
+    en: "Personal Details",
     pt: "Detalhes Pessoais",
   },
   title: {
@@ -226,6 +225,26 @@ export const translations: Translations = {
   gender: {
     en: "Gênero",
     pt: "Gênero",
+  },
+  male: {
+    en: "Male",
+    pt: "Masculino",
+  },
+  female: {
+    en: "Female",
+    pt: "Feminino",
+  },
+  selectGender: {
+    en: "Select Gender",
+    pt: "Selecionar Gênero",
+  },
+  selectMaritalStatus: {
+    en: "Select Marital Status",
+    pt: "Selecionar Estado Civil",
+  },
+  selectOption: {
+    en: "Select Option",
+    pt: "Selecionar Opção",
   },
   address: {
     en: "Endereço (Rua/Av.)",
@@ -256,7 +275,7 @@ export const translations: Translations = {
     pt: "E-mail (Opcional)",
   },
   identificationDetails: {
-    en: "Detalhes de Identificação",
+    en: "Identification Details",
     pt: "Detalhes de Identificação",
   },
   idType: {
@@ -300,7 +319,7 @@ export const translations: Translations = {
     pt: "Estado Civil",
   },
   documentUploads: {
-    en: "Upload de Documentos",
+    en: "Document Uploads",
     pt: "Upload de Documentos",
   },
   uploadNuitDocument: {
@@ -548,11 +567,10 @@ export const translations: Translations = {
     pt: "Detalhes da Conta",
   },
   bankServicesPageTitle: {
-    en: "Bank Services",
-    pt: "Serviços Bancários",
+    en: "More Services",
+    pt: "Mais Serviços",
   },
   bankServices: {
-    // Ensure this key is present for the button text
     en: "Bank Services",
     pt: "Serviços Bancários",
   },
@@ -567,5 +585,136 @@ export const translations: Translations = {
   blankPageContent: {
     en: "This page is currently under construction. Please check back later!",
     pt: "Esta página está atualmente em construção. Por favor, volte mais tarde!",
+  },
+  // Dashboard translations
+  goodMorning: {
+    en: "Good Morning",
+    pt: "Bom Dia",
+  },
+  goodAfternoon: {
+    en: "Good Afternoon",
+    pt: "Boa Tarde",
+  },
+  goodEvening: {
+    en: "Good Evening",
+    pt: "Boa Noite",
+  },
+  currentBalance: {
+    en: "Current Balance",
+    pt: "Saldo Atual",
+  },
+  accountNumber: {
+    en: "Account Number",
+    pt: "Número da Conta",
+  },
+  overview: {
+    en: "Overview",
+    pt: "Visão Geral",
+  },
+  documents: {
+    en: "Documents",
+    pt: "Documentos",
+  },
+  // Removed 'requests' translation key
+  transfer: {
+    en: "Transfer",
+    pt: "Transferir",
+  },
+  cardControls: {
+    en: "Card Controls",
+    pt: "Controle de Cartão",
+  },
+  upgradeAccount: {
+    en: "Upgrade Account",
+    pt: "Atualizar Conta",
+  },
+  recentTransactions: {
+    en: "Recent Transactions",
+    pt: "Transações Recentes",
+  },
+  viewAll: {
+    en: "View All",
+    pt: "Ver Tudo",
+  },
+  accountManagement: {
+    en: "Account Management",
+    pt: "Gestão da Conta",
+  },
+  myCards: {
+    en: "My Cards",
+    pt: "Meus Cartões",
+  },
+  accountSettings: {
+    en: "Account Settings",
+    pt: "Configurações da Conta",
+  },
+  documentsExpiringSoon: {
+    en: "documents expiring soon",
+    pt: "documentos expirando em breve",
+  },
+  identityDocuments: {
+    en: "Identity Documents",
+    pt: "Documentos de Identidade",
+  },
+  financialDocuments: {
+    en: "Financial Documents",
+    pt: "Documentos Financeiros",
+  },
+  bankDocuments: {
+    en: "Bank Documents",
+    pt: "Documentos Bancários",
+  },
+  uploadNewDocument: {
+    en: "Upload New Document",
+    pt: "Carregar Novo Documento",
+  },
+  // Removed request-related translation keys
+  active: {
+    en: "Active",
+    pt: "Ativo",
+  },
+  blocked: {
+    en: "Blocked",
+    pt: "Bloqueado",
+  },
+  expired: {
+    en: "Expired",
+    pt: "Expirado",
+  },
+  expiring: {
+    en: "Expiring",
+    pt: "Expirando",
+  },
+  valid: {
+    en: "Valid",
+    pt: "Válido",
+  },
+  sendMoney: {
+    en: "Send Money",
+    pt: "Enviar Dinheiro",
+  },
+  payBills: {
+    en: "Pay Bills",
+    pt: "Pagar Contas",
+  },
+  topUp: {
+    en: "Recarregar",
+    pt: "Recarregar",
+  },
+  standardAccount: {
+    en: "Standard Account",
+    pt: "Conta Padrão",
+  },
+  premiumAccount: {
+    en: "Premium Account",
+    pt: "Conta Premium",
+  },
+  upgradeNow: {
+    en: "Upgrade Now",
+    pt: "Atualizar Agora",
+  },
+  additionalInformation: {
+    en: "Additional Information",
+    pt: "Informações Adicionais",
   },
 }

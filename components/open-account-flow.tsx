@@ -2,7 +2,6 @@
 import { useState } from "react"
 import { SignInRegister } from "./auth/sign-in-register"
 import { OtpVerification } from "./auth/otp-verification"
-import { AccountApplicationForm } from "./account-opening/account-application-form"
 import { ProfessionalButton } from "@/components/ui/professional-button"
 import { ArrowLeft } from "lucide-react"
 import { X } from "lucide-react"
@@ -10,6 +9,7 @@ import { useLanguage } from "@/components/language-context"
 import { translations } from "@/lib/translations"
 import { AccountDetailsPage } from "./account-details-page" // Import the renamed page
 import { BankServicesPage } from "./bank-services-page" // Import the new blank page
+import { MultiStepAccountApplication } from "./account-opening/multi-step-account-application" // Import new multi-step form
 
 export type AccountType = {
   id: string
@@ -80,7 +80,7 @@ export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
           return <AccountDetailsPage onGoToBankServices={handleGoToBankServices} onClose={onClose} />
         } else {
           // 'account-opening'
-          return <AccountApplicationForm onSubmit={handleFormSubmit} onBack={handleBack} />
+          return <MultiStepAccountApplication onSubmit={handleFormSubmit} onBack={handleBack} />
         }
       case 3:
         if (flowType === "login") {
@@ -125,7 +125,7 @@ export function OpenAccountFlow({ onClose, flowType }: OpenAccountFlowProps) {
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-white text-gray-900">
       <header className="flex items-center justify-between border-b border-gray-200 p-4">
-        {(step === 1 || (step === 3 && flowType === "login")) && ( // Show back button on OTP and new Bank Services page
+        {(step === 1 || (step === 3 && flowType === "login") || (step === 2 && flowType === "account-opening")) && ( // Show back button on OTP, new Bank Services page, and multi-step form
           <ProfessionalButton size="icon" variant="ghost" onClick={handleBack} aria-label="Go back">
             <ArrowLeft className="h-6 w-6 text-gray-600" />
           </ProfessionalButton>
