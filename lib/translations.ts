@@ -471,7 +471,7 @@ export const translations: Translations = {
     pt: "Fechar",
   },
   selectBranch: {
-    en: "Selecionar Agência",
+    en: "Select Branch",
     pt: "Selecionar Agência",
   },
   selectIdType: {
@@ -479,7 +479,7 @@ export const translations: Translations = {
     pt: "Selecionar Tipo de Documento",
   },
   select: {
-    en: "Selecionar",
+    en: "Select",
     pt: "Selecionar",
   },
   id: {
@@ -716,5 +716,118 @@ export const translations: Translations = {
   additionalInformation: {
     en: "Additional Information",
     pt: "Informações Adicionais",
+  },
+  // Queue Management translations
+  selectBranchToVisit: {
+    en: "Select Branch to Visit",
+    pt: "Selecionar Agência para Visitar",
+  },
+  chooseNearestBranch: {
+    en: "Choose the branch nearest to you",
+    pt: "Escolha a agência mais próxima de você",
+  },
+  open: {
+    en: "Open",
+    pt: "Aberto",
+  },
+  busy: {
+    en: "Busy",
+    pt: "Ocupado",
+  },
+  closed: {
+    en: "Closed",
+    pt: "Fechado",
+  },
+  inQueue: {
+    en: "in queue",
+    pt: "na fila",
+  },
+  avgWait: {
+    en: "avg wait",
+    pt: "espera média",
+  },
+  selectService: {
+    en: "Select Service",
+    pt: "Selecionar Serviço",
+  },
+  selectServiceNeeded: {
+    en: "Select Service Needed",
+    pt: "Selecionar Serviço Necessário",
+  },
+  selectedBranch: {
+    en: "Selected Branch",
+    pt: "Agência Selecionada",
+  },
+  documentsRequired: {
+    en: "Documents Required",
+    pt: "Documentos Necessários",
+  },
+  service: {
+    en: "Service",
+    pt: "Serviço",
+  },
+  queueTicket: {
+    en: "Queue Ticket",
+    pt: "Bilhete de Fila",
+  },
+  yourQueueTicket: {
+    en: "Your Queue Ticket",
+    pt: "Seu Bilhete de Fila",
+  },
+  peopleAheadOfYou: {
+    en: "people ahead of you",
+    pt: "pessoas à sua frente",
+  },
+  estimatedWait: {
+    en: "Estimated Wait",
+    pt: "Espera Estimada",
+  },
+  issuedAt: {
+    en: "Issued at",
+    pt: "Emitido às",
+  },
+  queueInformation: {
+    en: "Queue Information",
+    pt: "Informações da Fila",
+  },
+  currentTime: {
+    en: "Current Time",
+    pt: "Hora Atual",
+  },
+  totalInQueue: {
+    en: "Total in Queue",
+    pt: "Total na Fila",
+  },
+  averageServiceTime: {
+    en: "Average Service Time",
+    pt: "Tempo Médio de Atendimento",
+  },
+  recentServiceTimes: {
+    en: "Recent Service Times",
+    pt: "Tempos de Atendimento Recentes",
+  },
+  cancelTicket: {
+    en: "Cancel Ticket",
+    pt: "Cancelar Bilhete",
+  },
+  keepTicketActive: {
+    en: "Keep Ticket Active",
+    pt: "Manter Bilhete Ativo",
+  },
+  cancelled: {
+    en: "Cancelled",
+    pt: "Cancelado",
+  },
+  completed: {
+    en: "Completed",
+    pt: "Concluído",
+  },
+  importantNotice: {
+    en: "Important Notice",
+    pt: "Aviso Importante",
+  },
+  arriveOnTimeNotice: {
+    en: "Please arrive at the branch 5 minutes before your estimated time to avoid losing your place in the queue.",
+    pt: "Por favor, chegue à agência 5 minutos antes do seu horário estimado para evitar perder seu lugar na fila.",
   },
 }

@@ -6,6 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Menu, Users, FileText, CreditCard, LogIn } from "lucide-react"
 import { useState } from "react"
 import { OpenAccountFlow } from "./open-account-flow"
+import { JoinQueueFlow } from "./queue/join-queue-flow"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useLanguage } from "@/components/language-context"
 import { translations } from "@/lib/translations"
@@ -13,7 +14,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 
 export function BankHomePage() {
   const carouselImages = ["/images/millennium-bim-carousel.jpeg"]
-  const [activeFlow, setActiveFlow] = useState<"none" | "account-opening" | "login">("none") // New state for active flow
+  const [activeFlow, setActiveFlow] = useState<"none" | "account-opening" | "login" | "queue">("none")
   const { language } = useLanguage()
 
   const handleOpenAccountClick = () => {
@@ -22,6 +23,10 @@ export function BankHomePage() {
 
   const handleLoginAccountClick = () => {
     setActiveFlow("login")
+  }
+
+  const handleJoinQueueClick = () => {
+    setActiveFlow("queue")
   }
 
   const handleCloseFlow = () => {
@@ -91,7 +96,7 @@ export function BankHomePage() {
         <section>
           <ProfessionalButton
             className="w-full h-16 text-left justify-start space-x-4"
-            onClick={handleLoginAccountClick} // Enabled and linked to new handler
+            onClick={handleLoginAccountClick}
             aria-label={translations.logInAccount[language]}
           >
             <LogIn className="h-6 w-6" />
@@ -108,7 +113,7 @@ export function BankHomePage() {
 
           <ProfessionalButton
             className="w-full h-16 text-left justify-start space-x-4"
-            onClick={handleOpenAccountClick} // Linked to new handler
+            onClick={handleOpenAccountClick}
             aria-label={translations.openAccount[language]}
           >
             <CreditCard className="h-6 w-6" />
@@ -121,6 +126,7 @@ export function BankHomePage() {
           <ProfessionalButton
             variant="secondary"
             className="w-full h-16 text-left justify-start space-x-4"
+            onClick={handleJoinQueueClick}
             aria-label={translations.joinQueue[language]}
           >
             <Users className="h-6 w-6" />
@@ -149,8 +155,10 @@ export function BankHomePage() {
         <p className="text-sm text-slate-500">© 2024 Millennium BIM. {translations.allRightsReserved[language]}</p>
       </footer>
 
-      {/* Open Account Flow */}
-      {activeFlow !== "none" && <OpenAccountFlow onClose={handleCloseFlow} flowType={activeFlow} />}
+      {/* Flows */}
+      {activeFlow === "account-opening" && <OpenAccountFlow onClose={handleCloseFlow} flowType="account-opening" />}
+      {activeFlow === "login" && <OpenAccountFlow onClose={handleCloseFlow} flowType="login" />}
+      {activeFlow === "queue" && <JoinQueueFlow onClose={handleCloseFlow} />}
     </div>
   )
 }
